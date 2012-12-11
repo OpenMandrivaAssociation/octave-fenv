@@ -1,20 +1,20 @@
 %define	pkgname fenv
 %define name	octave-%{pkgname}
 %define version 0.1.0
-%define release %mkrel 1
 
 Summary:	Change floating point precision in Octave
 Name:		%{name}
 Version:	%{version}
-Release:	%{release}
+Release:        2
 Source0:	%{pkgname}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
 Url:		http://octave.sourceforge.net/fenv/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Conflicts:	octave-forge <= 20090607
 Requires:	octave >= 3.0.0
-BuildRequires:	octave-devel >= 3.0.0, MesaGL-devel, MesaGLU-devel
+BuildRequires:  octave-devel >= 3.0.0
+BuildRequires:  mesagl-devel
+BuildRequires:  mesaglu-devel
 
 %description
 On supported architectures, change the rounding mode of the floating
@@ -28,7 +28,6 @@ floating point arithmetics.
 cp %SOURCE0 .
 
 %install
-rm -rf %{buildroot}
 %__install -m 755 -d %{buildroot}%{_datadir}/octave/packages/
 %__install -m 755 -d %{buildroot}%{_libdir}/octave/packages/
 export OCT_PREFIX=%{buildroot}%{_datadir}/octave/packages
@@ -40,7 +39,6 @@ mv %{pkgname}/COPYING .
 mv %{pkgname}/DESCRIPTION .
 
 %clean
-%__rm -rf %{buildroot}
 
 %post
 %{_bindir}/test -x %{_bindir}/octave && %{_bindir}/octave -q -H --no-site-file --eval "pkg('rebuild');" || :
@@ -53,4 +51,12 @@ mv %{pkgname}/DESCRIPTION .
 %doc COPYING DESCRIPTION
 %{_datadir}/octave/packages/%{pkgname}-%{version}
 %{_libdir}/octave/packages/%{pkgname}-%{version}
+
+
+
+%changelog
+* Sun Aug 21 2011 Lev Givon <lev@mandriva.org> 0.1.0-1mdv2012.0
++ Revision: 696032
+- import octave-fenv
+
 
