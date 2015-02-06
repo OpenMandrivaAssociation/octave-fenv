@@ -3,7 +3,7 @@
 Summary:	Change floating point precision in Octave
 Name:       octave-%{pkgname}
 Version:	0.1.0
-Release:        5
+Release:        6
 Source0:	%{pkgname}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
